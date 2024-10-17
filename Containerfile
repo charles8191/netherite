@@ -1,4 +1,5 @@
 FROM git.almalinux.org/charles2/calcite:9
+ARG LIBREWOLF_VERSION=131.0.2-1
 # Fixes
 RUN mkdir /var/roothome && \
 chown root:root /var/roothome && \
@@ -16,7 +17,7 @@ RUN curl --create-dirs -Lo /root/pubkey.gpg https://repo.librewolf.net/pubkey.gp
 echo "importing" && \
 rpm --import /root/pubkey.gpg && \
 rm -vf /root/pubkey.gpg && \
-dnf swap firefox https://repo.librewolf.net/pool/librewolf-131.0.2-1-linux-x86_64-rpm.rpm -y
+dnf swap firefox https://repo.librewolf.net/pool/librewolf-${LIBREWOLF_VERSION}-linux-x86_64-rpm.rpm -y
 # hardened_malloc
 RUN curl --create-dirs -Lo /usr/lib/libhardened_malloc.so https://github.com/charles8191/hardened_malloc/raw/refs/heads/main/libhardened_malloc.so && \
 chmod +x /usr/lib/libhardened_malloc.so && \
