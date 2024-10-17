@@ -11,7 +11,7 @@ sed -i 's,BUG_REPORT_URL,JUNK_BUG_REPORT_URL,g' /usr/lib/os-release && \
 curl --create-dirs -Lo /pubkey.gpg https://repo.librewolf.net/pubkey.gpg && \
 rpm --import /pubkey.gpg && \
 rm -vf /pubkey.gpg && \
-dnf install firewalld && \
+dnf install firewalld -y && \
 dnf swap firefox https://repo.librewolf.net/pool/librewolf-${LIBREWOLF_VERSION}-linux-x86_64-rpm.rpm -y && \
 curl --create-dirs -Lo /usr/lib/libhardened_malloc.so https://github.com/charles8191/hardened_malloc/raw/refs/heads/main/libhardened_malloc.so && \
 chmod +x /usr/lib/libhardened_malloc.so && \
