@@ -5,7 +5,7 @@ Netherite is a secure & private operating system based on [Calcite](https://git.
 ## Features
 
 - [hardened_malloc](https://github.com/GrapheneOS/hardened_malloc) from GrapheneOS using [hardened_malloc binary](https://github.com/charles8191/hardened_malloc)
-- Mostly ANSSI-BP-028 Minimal compliant
+- Mostly ANSSI-BP-028 Minimal compliant (because it is a solid base for adding extra security)
 - [LibreWolf](https://librewolf.net/) instead of Firefox
 - [Some configuration files from GrapheneOS infrastructure](https://github.com/GrapheneOS/infrastructure)
 - Modified `os-release` file
