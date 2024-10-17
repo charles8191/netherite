@@ -27,3 +27,7 @@ I prefer EL-based distros over Fedora and secureblue doesn't support bootc yet e
 ### Why the name?
 
 The name is a really hard material in the video game Minecraft, further suggesting that this is a hardened Linux distribution.
+
+### What device do you recommend for security?
+
+A device with Windows 11 from the factory is a good baseline. Secure Boot doesn't need to be disabled. Adding a BIOS password is recommended.
