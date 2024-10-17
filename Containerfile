@@ -18,4 +18,5 @@ echo "/usr/lib/libhardened_malloc.so" > /etc/ld.so.preload && \
 curl --create-dirs -Lo /etc/chrony.conf https://github.com/GrapheneOS/infrastructure/raw/refs/heads/main/chrony.conf && \
 curl --create-dirs -Lo /usr/local/lib/sysctl.d/local.conf https://github.com/GrapheneOS/infrastructure/raw/refs/heads/main/sysctl.d/local.conf && \
 (bash /scap.sh || true) && \
-rm -vf /scap.sh
+rm -vf /scap.sh && \
+dnf clean all
