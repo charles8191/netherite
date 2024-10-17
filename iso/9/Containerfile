@@ -1,0 +1,7 @@
+FROM quay.io/fedora/fedora:40-x86_64
+
+COPY files/ks.ks /ks.ks
+COPY files/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+RUN dnf install lorax util-linux -y
+ENTRYPOINT ["/entrypoint.sh"]
