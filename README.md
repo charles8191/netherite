@@ -31,3 +31,5 @@ The name is a really hard material in the video game Minecraft, further suggesti
 ### What device do you recommend for security?
 
 A device with Windows 11 from the factory is a good baseline. Secure Boot doesn't need to be disabled. Adding a BIOS password is recommended.
+
+Advanced users can install [Mosby](https://github.com/pbatard/Mosby) using the UEFI shell, which goes hand-in-hand with Netherite.
