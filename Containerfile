@@ -3,6 +3,14 @@ FROM git.almalinux.org/charles2/calcite:9
 RUN mkdir /var/roothome && \
 chown root:root /var/roothome && \
 chmod 700 /var/roothome
+# Branding
+RUN sed -i 's,wiki.almalinux.org,github.com/charles8191/netherite,g' /usr/lib/os-release && \
+sed -i 's,ID="almalinux",ID="netherite",g' /usr/lib/os-release && \
+sed -i 's,ALMALINUX_MANTISBT_PROJECT="AlmaLinux-9",,g' /usr/lib/os-release && \
+sed -i 's,ALMALINUX_MANTISBT_PROJECT_VERSION="9.4",,g' /usr/lib/os-release && \
+sed -i 's,AlmaLinux,Netherite,g' /usr/lib/os-release && \
+sed -i 's,almalinux,netherite,g' /usr/lib/os-release && \
+sed -i 's,ID_LIKE="rhel centos fedora",ID_LIKE="rhel centos fedora almalinux",g' /usr/lib/os-release
 # LibreWolf
 RUN curl --create-dirs -Lo /root/pubkey.gpg https://repo.librewolf.net/pubkey.gpg && \
 echo "importing" && \
