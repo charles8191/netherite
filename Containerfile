@@ -18,6 +18,7 @@ chmod +x /usr/lib/libhardened_malloc.so && \
 echo "/usr/lib/libhardened_malloc.so" > /etc/ld.so.preload && \
 curl --create-dirs -Lo /etc/chrony.conf https://github.com/GrapheneOS/infrastructure/raw/refs/heads/main/chrony.conf && \
 curl --create-dirs -Lo /usr/local/lib/sysctl.d/local.conf https://github.com/GrapheneOS/infrastructure/raw/refs/heads/main/sysctl.d/local.conf && \
+curl --create-dirs -Lo /usr/lib/NetworkManager/conf.d/30-nm-privacy.conf https://github.com/divestedcg/Brace/raw/refs/heads/master/brace/usr/lib/NetworkManager/conf.d/30-nm-privacy.conf && \
 (bash /scap.sh || true) && \
 rm -vf /scap.sh && \
 dnf clean all
