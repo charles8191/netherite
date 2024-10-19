@@ -12,6 +12,7 @@ Netherite is a secure & private operating system based on [Calcite](https://git.
 - [LibreWolf](https://librewolf.net/) instead of Firefox
 - [Some configuration files from GrapheneOS infrastructure](https://github.com/GrapheneOS/infrastructure)
 - Modified `os-release` file
+- [Enhanced NetworkManager privacy](https://github.com/divestedcg/Brace/blob/master/brace/usr/lib/NetworkManager/conf.d/30-nm-privacy.conf)
 
 ## Installation
 
