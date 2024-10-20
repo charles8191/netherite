@@ -1,5 +1,5 @@
 FROM git.almalinux.org/charles2/calcite:9
-ARG LIBREWOLF_VERSION=131.0.2-1
+ARG LIBREWOLF_VERSION=131.0.3-1
 COPY scap.sh /scap.sh
 RUN sed -i 's,wiki.almalinux.org,github.com/charles8191/netherite,g' /usr/lib/os-release && \
 sed -i 's,ID="almalinux",ID="netherite",g' /usr/lib/os-release && \
