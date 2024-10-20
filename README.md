@@ -2,8 +2,8 @@
 
 Netherite is a secure & private operating system based on [Calcite](https://git.almalinux.org/charles2/calcite), an AlmaLinux-based immutable OS.
 
-- **Setting up an internet connection is mandatory, otherwise installation will fail. If you can't set up an internet connection, do not install this software.**
-- **This project is an early preview.** Here be dragons!
+> [!WARNING]
+> Setting up an internet connection is mandatory, otherwise installation will fail. If you can't set up an internet connection, do not install this software.
 
 ## Features
 
