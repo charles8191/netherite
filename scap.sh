@@ -13,7 +13,7 @@
 # https://cyber.gouv.fr/publications/configuration-recommendations-gnulinux-system
 #
 # Profile ID:  xccdf_org.ssgproject.content_profile_anssi_bp28_minimal
-# Benchmark ID:  xccdf_org.ssgproject.content_benchmark_ALMALINUX-9
+# Benchmark ID:  xccdf_org.ssgproject.content_benchmark_RHEL-9
 # Benchmark Version:  0.1.74
 # XCCDF Version:  1.2
 #
@@ -120,41 +120,9 @@ fi
 ) # END fix for 'xccdf_org.ssgproject.content_rule_dnf-automatic_security_updates_only'
 
 ###############################################################################
-# BEGIN fix (4 / 47) for 'xccdf_org.ssgproject.content_rule_ensure_almalinux_gpgkey_installed'
+# BEGIN fix (4 / 47) for 'xccdf_org.ssgproject.content_rule_ensure_gpgcheck_globally_activated'
 ###############################################################################
-(>&2 echo "Remediating rule 4/47: 'xccdf_org.ssgproject.content_rule_ensure_almalinux_gpgkey_installed'"); (
-readonly ALMALINUX_FINGERPRINT="BF18AC2876178908D6E71267D36CB86CB86B3716"
-
-# Location of the key we would like to import (once it's integrity verified)
-readonly ALMALINUX_RELEASE_KEY="/etc/pki/rpm-gpg/RPM-GPG-KEY-AlmaLinux-9"
-
-RPM_GPG_DIR_PERMS=$(stat -c %a "$(dirname "$ALMALINUX_RELEASE_KEY")")
-
-# Verify /etc/pki/rpm-gpg directory permissions are safe
-if [ "${RPM_GPG_DIR_PERMS}" -le "755" ]
-then
-  # If they are safe, try to obtain fingerprints from the key file
-  # (to ensure there won't be e.g. CRC error)
-  readarray -t GPG_OUT < <(gpg --with-fingerprint --with-colons "$ALMALINUX_RELEASE_KEY" | grep "^fpr" | cut -d ":" -f 10)
-  GPG_RESULT=$?
-  # No CRC error, safe to proceed
-  if [ "${GPG_RESULT}" -eq "0" ]
-  then
-    # Filter just hexadecimal fingerprints from gpg's output from
-    # processing of a key file
-    echo "${GPG_OUT[*]}" | grep -vE "${ALMALINUX_FINGERPRINT}" || {
-      # If $ ALMALINUX_RELEASE_KEY file doesn't contain any keys with unknown fingerprint, import it
-      rpm --import "${ALMALINUX_RELEASE_KEY}"
-    }
-  fi
-fi
-
-) # END fix for 'xccdf_org.ssgproject.content_rule_ensure_almalinux_gpgkey_installed'
-
-###############################################################################
-# BEGIN fix (5 / 47) for 'xccdf_org.ssgproject.content_rule_ensure_gpgcheck_globally_activated'
-###############################################################################
-(>&2 echo "Remediating rule 5/47: 'xccdf_org.ssgproject.content_rule_ensure_gpgcheck_globally_activated'"); (
+(>&2 echo "Remediating rule 4/47: 'xccdf_org.ssgproject.content_rule_ensure_gpgcheck_globally_activated'"); (
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q dnf; then
 
@@ -175,6 +143,8 @@ else
     if [[ -s "/etc/dnf/dnf.conf" ]] && [[ -n "$(tail -c 1 -- "/etc/dnf/dnf.conf" || true)" ]]; then
         LC_ALL=C sed -i --follow-symlinks '$a'\\ "/etc/dnf/dnf.conf"
     fi
+    cce=""
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "/etc/dnf/dnf.conf" >> "/etc/dnf/dnf.conf"
     printf '%s\n' "$formatted_output" >> "/etc/dnf/dnf.conf"
 fi
 
@@ -185,9 +155,9 @@ fi
 ) # END fix for 'xccdf_org.ssgproject.content_rule_ensure_gpgcheck_globally_activated'
 
 ###############################################################################
-# BEGIN fix (6 / 47) for 'xccdf_org.ssgproject.content_rule_ensure_gpgcheck_local_packages'
+# BEGIN fix (5 / 47) for 'xccdf_org.ssgproject.content_rule_ensure_gpgcheck_local_packages'
 ###############################################################################
-(>&2 echo "Remediating rule 6/47: 'xccdf_org.ssgproject.content_rule_ensure_gpgcheck_local_packages'"); (
+(>&2 echo "Remediating rule 5/47: 'xccdf_org.ssgproject.content_rule_ensure_gpgcheck_local_packages'"); (
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q dnf; then
 
@@ -208,6 +178,8 @@ else
     if [[ -s "/etc/dnf/dnf.conf" ]] && [[ -n "$(tail -c 1 -- "/etc/dnf/dnf.conf" || true)" ]]; then
         LC_ALL=C sed -i --follow-symlinks '$a'\\ "/etc/dnf/dnf.conf"
     fi
+    cce=""
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "/etc/dnf/dnf.conf" >> "/etc/dnf/dnf.conf"
     printf '%s\n' "$formatted_output" >> "/etc/dnf/dnf.conf"
 fi
 
@@ -218,13 +190,47 @@ fi
 ) # END fix for 'xccdf_org.ssgproject.content_rule_ensure_gpgcheck_local_packages'
 
 ###############################################################################
-# BEGIN fix (7 / 47) for 'xccdf_org.ssgproject.content_rule_ensure_gpgcheck_never_disabled'
+# BEGIN fix (6 / 47) for 'xccdf_org.ssgproject.content_rule_ensure_gpgcheck_never_disabled'
 ###############################################################################
-(>&2 echo "Remediating rule 7/47: 'xccdf_org.ssgproject.content_rule_ensure_gpgcheck_never_disabled'"); (
+(>&2 echo "Remediating rule 6/47: 'xccdf_org.ssgproject.content_rule_ensure_gpgcheck_never_disabled'"); (
 
 sed -i 's/gpgcheck\s*=.*/gpgcheck=1/g' /etc/yum.repos.d/*
 
 ) # END fix for 'xccdf_org.ssgproject.content_rule_ensure_gpgcheck_never_disabled'
+
+###############################################################################
+# BEGIN fix (7 / 47) for 'xccdf_org.ssgproject.content_rule_ensure_redhat_gpgkey_installed'
+###############################################################################
+(>&2 echo "Remediating rule 7/47: 'xccdf_org.ssgproject.content_rule_ensure_redhat_gpgkey_installed'"); (
+# The two fingerprints below are retrieved from https://access.redhat.com/security/team/key
+readonly REDHAT_RELEASE_FINGERPRINT="567E347AD0044ADE55BA8A5F199E2F91FD431D51"
+readonly REDHAT_AUXILIARY_FINGERPRINT="7E4624258C406535D56D6F135054E4A45A6340B3"
+
+# Location of the key we would like to import (once it's integrity verified)
+readonly REDHAT_RELEASE_KEY="/etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release"
+
+RPM_GPG_DIR_PERMS=$(stat -c %a "$(dirname "$REDHAT_RELEASE_KEY")")
+
+# Verify /etc/pki/rpm-gpg directory permissions are safe
+if [ "${RPM_GPG_DIR_PERMS}" -le "755" ]
+then
+  # If they are safe, try to obtain fingerprints from the key file
+  # (to ensure there won't be e.g. CRC error).
+
+  readarray -t GPG_OUT < <(gpg --show-keys --with-fingerprint --with-colons "$REDHAT_RELEASE_KEY" | grep -A1 "^pub" | grep "^fpr" | cut -d ":" -f 10)
+
+  GPG_RESULT=$?
+  # No CRC error, safe to proceed
+  if [ "${GPG_RESULT}" -eq "0" ]
+  then
+    echo "${GPG_OUT[*]}" | grep -vE "${REDHAT_RELEASE_FINGERPRINT}|${REDHAT_AUXILIARY_FINGERPRINT}" || {
+      # If $REDHAT_RELEASE_KEY file doesn't contain any keys with unknown fingerprint, import it
+      rpm --import "${REDHAT_RELEASE_KEY}"
+    }
+  fi
+fi
+
+) # END fix for 'xccdf_org.ssgproject.content_rule_ensure_redhat_gpgkey_installed'
 
 ###############################################################################
 # BEGIN fix (8 / 47) for 'xccdf_org.ssgproject.content_rule_security_patches_up_to_date'
@@ -950,6 +956,8 @@ else
     if [[ -s "/etc/security/pwquality.conf" ]] && [[ -n "$(tail -c 1 -- "/etc/security/pwquality.conf" || true)" ]]; then
         LC_ALL=C sed -i --follow-symlinks '$a'\\ "/etc/security/pwquality.conf"
     fi
+    cce=""
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "/etc/security/pwquality.conf" >> "/etc/security/pwquality.conf"
     printf '%s\n' "$formatted_output" >> "/etc/security/pwquality.conf"
 fi
 
@@ -990,6 +998,8 @@ else
     if [[ -s "/etc/security/pwquality.conf" ]] && [[ -n "$(tail -c 1 -- "/etc/security/pwquality.conf" || true)" ]]; then
         LC_ALL=C sed -i --follow-symlinks '$a'\\ "/etc/security/pwquality.conf"
     fi
+    cce=""
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "/etc/security/pwquality.conf" >> "/etc/security/pwquality.conf"
     printf '%s\n' "$formatted_output" >> "/etc/security/pwquality.conf"
 fi
 
@@ -1030,6 +1040,8 @@ else
     if [[ -s "/etc/security/pwquality.conf" ]] && [[ -n "$(tail -c 1 -- "/etc/security/pwquality.conf" || true)" ]]; then
         LC_ALL=C sed -i --follow-symlinks '$a'\\ "/etc/security/pwquality.conf"
     fi
+    cce=""
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "/etc/security/pwquality.conf" >> "/etc/security/pwquality.conf"
     printf '%s\n' "$formatted_output" >> "/etc/security/pwquality.conf"
 fi
 
@@ -1070,6 +1082,8 @@ else
     if [[ -s "/etc/security/pwquality.conf" ]] && [[ -n "$(tail -c 1 -- "/etc/security/pwquality.conf" || true)" ]]; then
         LC_ALL=C sed -i --follow-symlinks '$a'\\ "/etc/security/pwquality.conf"
     fi
+    cce=""
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "/etc/security/pwquality.conf" >> "/etc/security/pwquality.conf"
     printf '%s\n' "$formatted_output" >> "/etc/security/pwquality.conf"
 fi
 
@@ -1110,6 +1124,8 @@ else
     if [[ -s "/etc/security/pwquality.conf" ]] && [[ -n "$(tail -c 1 -- "/etc/security/pwquality.conf" || true)" ]]; then
         LC_ALL=C sed -i --follow-symlinks '$a'\\ "/etc/security/pwquality.conf"
     fi
+    cce=""
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "/etc/security/pwquality.conf" >> "/etc/security/pwquality.conf"
     printf '%s\n' "$formatted_output" >> "/etc/security/pwquality.conf"
 fi
 
@@ -1129,7 +1145,72 @@ if rpm --quiet -q pam; then
 var_password_pam_retry='3'
 
 
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^retry")
 
+# shellcheck disable=SC2059
+printf -v formatted_output "%s = %s" "$stripped_key" "$var_password_pam_retry"
+
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^retry\\>" "/etc/security/pwquality.conf"; then
+    escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
+    LC_ALL=C sed -i --follow-symlinks "s/^retry\\>.*/$escaped_formatted_output/gi" "/etc/security/pwquality.conf"
+else
+    if [[ -s "/etc/security/pwquality.conf" ]] && [[ -n "$(tail -c 1 -- "/etc/security/pwquality.conf" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "/etc/security/pwquality.conf"
+    fi
+    cce=""
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "/etc/security/pwquality.conf" >> "/etc/security/pwquality.conf"
+    printf '%s\n' "$formatted_output" >> "/etc/security/pwquality.conf"
+fi
+	
+		if [ -e "/etc/pam.d/password-auth" ] ; then
+    PAM_FILE_PATH="/etc/pam.d/password-auth"
+    if [ -f /usr/bin/authselect ]; then
+        
+        if ! authselect check; then
+        echo "
+        authselect integrity check failed. Remediation aborted!
+        This remediation could not be applied because an authselect profile was not selected or the selected profile is not intact.
+        It is not recommended to manually edit the PAM files when authselect tool is available.
+        In cases where the default authselect profile does not cover a specific demand, a custom authselect profile is recommended."
+        exit 1
+        fi
+
+        CURRENT_PROFILE=$(authselect current -r | awk '{ print $1 }')
+        # If not already in use, a custom profile is created preserving the enabled features.
+        if [[ ! $CURRENT_PROFILE == custom/* ]]; then
+            ENABLED_FEATURES=$(authselect current | tail -n+3 | awk '{ print $2 }')
+            authselect create-profile hardening -b $CURRENT_PROFILE
+            CURRENT_PROFILE="custom/hardening"
+            
+            authselect apply-changes -b --backup=before-hardening-custom-profile
+            authselect select $CURRENT_PROFILE
+            for feature in $ENABLED_FEATURES; do
+                authselect enable-feature $feature;
+            done
+            
+            authselect apply-changes -b --backup=after-hardening-custom-profile
+        fi
+        PAM_FILE_NAME=$(basename "/etc/pam.d/password-auth")
+        PAM_FILE_PATH="/etc/authselect/$CURRENT_PROFILE/$PAM_FILE_NAME"
+
+        authselect apply-changes -b
+    fi
+    
+if grep -qP "^\s*password\s.*\bpam_pwquality.so\s.*\bretry\b" "$PAM_FILE_PATH"; then
+    sed -i -E --follow-symlinks "s/(.*password.*pam_pwquality.so.*)\bretry\b=?[[:alnum:]]*(.*)/\1\2/g" "$PAM_FILE_PATH"
+fi
+    if [ -f /usr/bin/authselect ]; then
+        
+        authselect apply-changes -b
+    fi
+else
+    echo "/etc/pam.d/password-auth was not found" >&2
+fi
 	
 		if [ -e "/etc/pam.d/system-auth" ] ; then
     PAM_FILE_PATH="/etc/pam.d/system-auth"
@@ -1164,26 +1245,10 @@ var_password_pam_retry='3'
 
         authselect apply-changes -b
     fi
-    if ! grep -qP "^\s*password\s+requisite\s+pam_pwquality.so\s*.*" "$PAM_FILE_PATH"; then
-            # Line matching group + control + module was not found. Check group + module.
-            if [ "$(grep -cP '^\s*password\s+.*\s+pam_pwquality.so\s*' "$PAM_FILE_PATH")" -eq 1 ]; then
-                # The control is updated only if one single line matches.
-                sed -i -E --follow-symlinks "s/^(\s*password\s+).*(\bpam_pwquality.so.*)/\1requisite \2/" "$PAM_FILE_PATH"
-            else
-                LAST_MATCH_LINE=$(grep -nP "^\s*account" "$PAM_FILE_PATH" | tail -n 1 | cut -d: -f 1)
-                if [ ! -z $LAST_MATCH_LINE ]; then
-                    sed -i --follow-symlinks $LAST_MATCH_LINE" a password     requisite    pam_pwquality.so" "$PAM_FILE_PATH"
-                else
-                    echo "password    requisite    pam_pwquality.so" >> "$PAM_FILE_PATH"
-                fi
-            fi
-        fi
-        # Check the option
-        if ! grep -qP "^\s*password\s+requisite\s+pam_pwquality.so\s*.*\sretry\b" "$PAM_FILE_PATH"; then
-            sed -i -E --follow-symlinks "/\s*password\s+requisite\s+pam_pwquality.so.*/ s/$/ retry=$var_password_pam_retry/" "$PAM_FILE_PATH"
-        else
-            sed -i -E --follow-symlinks "s/(\s*password\s+requisite\s+pam_pwquality.so\s+.*)(retry=)[[:alnum:]]+\s*(.*)/\1\2$var_password_pam_retry \3/" "$PAM_FILE_PATH"
-        fi
+    
+if grep -qP "^\s*password\s.*\bpam_pwquality.so\s.*\bretry\b" "$PAM_FILE_PATH"; then
+    sed -i -E --follow-symlinks "s/(.*password.*pam_pwquality.so.*)\bretry\b=?[[:alnum:]]*(.*)/\1\2/g" "$PAM_FILE_PATH"
+fi
     if [ -f /usr/bin/authselect ]; then
         
         authselect apply-changes -b
@@ -1229,6 +1294,8 @@ else
     if [[ -s "/etc/security/pwquality.conf" ]] && [[ -n "$(tail -c 1 -- "/etc/security/pwquality.conf" || true)" ]]; then
         LC_ALL=C sed -i --follow-symlinks '$a'\\ "/etc/security/pwquality.conf"
     fi
+    cce=""
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "/etc/security/pwquality.conf" >> "/etc/security/pwquality.conf"
     printf '%s\n' "$formatted_output" >> "/etc/security/pwquality.conf"
 fi
 
@@ -1391,6 +1458,8 @@ else
     if [[ -s "/etc/login.defs" ]] && [[ -n "$(tail -c 1 -- "/etc/login.defs" || true)" ]]; then
         LC_ALL=C sed -i --follow-symlinks '$a'\\ "/etc/login.defs"
     fi
+    cce=""
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "/etc/login.defs" >> "/etc/login.defs"
     printf '%s\n' "$formatted_output" >> "/etc/login.defs"
 fi
 
@@ -1638,15 +1707,15 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 35/47: 'xccdf_org.ssgproject.content_rule_package_dhcp_removed'"); (
 
-# CAUTION: This remediation script will remove dhcp
+# CAUTION: This remediation script will remove dhcp-server
 #	   from the system, and may remove any packages
-#	   that depend on dhcp. Execute this
+#	   that depend on dhcp-server. Execute this
 #	   remediation AFTER testing on a non-production
 #	   system!
 
-if rpm -q --quiet "dhcp" ; then
+if rpm -q --quiet "dhcp-server" ; then
 
-    dnf remove -y "dhcp"
+    dnf remove -y "dhcp-server"
 
 fi
 
@@ -1891,4 +1960,3 @@ if rpm -q --quiet "tftp" ; then
 fi
 
 ) # END fix for 'xccdf_org.ssgproject.content_rule_package_tftp_removed'
-

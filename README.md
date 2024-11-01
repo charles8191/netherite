@@ -1,6 +1,9 @@
 # :pick: Netherite
 
-Netherite is a secure & private operating system based on [Calcite](https://git.almalinux.org/charles2/calcite), an AlmaLinux-based immutable OS.
+Netherite is a secure & private operating system based on [Calcite](https://github.com/charles8191/calcite), an Rocky Linux-based immutable OS.
+
+> [!IMPORTANT]  
+> We have changed to Rocky Linux, please reinstall.
 
 > [!WARNING]
 > Setting up an internet connection is mandatory, otherwise installation will fail. If you can't set up an internet connection, do not install this software.
@@ -16,7 +19,7 @@ Netherite is a secure & private operating system based on [Calcite](https://git.
 
 ## Installation
 
-You can use the [ISO](https://github.com/charles8191/netherite/releases/latest) (recommended), or use `bootc switch` if you are using Calcite, HeliumOS or just plain AlmaLinux/CentOS/Rocky bootc:
+You can use the [ISO](https://github.com/charles8191/netherite/releases/latest) (highly recommended), or use `bootc switch` if you are using Calcite or just plain Rocky bootc:
 
 ```bash
 bootc switch ghcr.io/charles8191/netherite/9

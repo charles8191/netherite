@@ -1,13 +1,16 @@
-FROM git.almalinux.org/charles2/calcite:9
-ARG LIBREWOLF_VERSION=131.0.3-1
+FROM ghcr.io/charles8191/calcite/9
+ARG LIBREWOLF_VERSION=132.0-1
 COPY scap.sh /scap.sh
-RUN sed -i 's,wiki.almalinux.org,github.com/charles8191/netherite,g' /usr/lib/os-release && \
-sed -i 's,ID="almalinux",ID="netherite",g' /usr/lib/os-release && \
-sed -i 's,ALMALINUX_MANTISBT_PROJECT,JUNK_ALMALINUX_MANTISBT_PROJECT,g' /usr/lib/os-release && \
-sed -i 's,AlmaLinux,Netherite,g' /usr/lib/os-release && \
-sed -i 's,almalinux,netherite,g' /usr/lib/os-release && \
-sed -i 's,ID_LIKE="rhel centos fedora",ID_LIKE="rhel centos fedora almalinux",g' /usr/lib/os-release && \
+RUN sed -i 's,rockylinux.org,github.com/charles8191/netherite,g' /usr/lib/os-release && \
+sed -i 's,Rocky Linux,Netherite,g' /usr/lib/os-release && \
+sed -i 's,Rocky,Netherite,g' /usr/lib/os-release && \
+sed -i 's,rockylinux,netherite,g' /usr/lib/os-release && \
+sed -i 's,rocky-linux,netherite,g' /usr/lib/os-release && \
+sed -i 's,rocky,netherite,g' /usr/lib/os-release && \
+sed -i 's,ID_LIKE="rhel centos fedora",ID_LIKE="rhel centos fedora rocky",g' /usr/lib/os-release && \
 sed -i 's,BUG_REPORT_URL,JUNK_BUG_REPORT_URL,g' /usr/lib/os-release && \
+sed -i 's,ROCKY_SUPPORT_PRODUCT,JUNK_ROCKY_SUPPORT_PRODUCT,g' /usr/lib/os-release && \
+sed -i 's,REDHAT_SUPPORT_PRODUCT,JUNK_REDHAT_SUPPORT_PRODUCT,g' /usr/lib/os-release && \
 curl --create-dirs -Lo /pubkey.gpg https://repo.librewolf.net/pubkey.gpg && \
 rpm --import /pubkey.gpg && \
 rm -vf /pubkey.gpg && \

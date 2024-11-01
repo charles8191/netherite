@@ -2,6 +2,7 @@ name: ISO
 
 on:
   workflow_dispatch:
+  push:
   schedule:
     - cron: '0 1 1 3,6,9,12 *'
     
