@@ -4,7 +4,8 @@ FROM ghcr.io/charles8191/calcite/9
 ADD net-privacy.conf /usr/lib/NetworkManager/conf.d/30-net-privacy.conf
 ADD chrony.conf /etc/chrony.conf
 ADD tunables.conf /usr/lib/sysctl.d/tunables.conf
-RUN set -x && \
+RUN \
+set -x && \
 # Install mimalloc
 curl --create-dirs -Lo /usr/lib64/libmimalloc-secure.so https://github.com/charles8191/mimalloc-secure/raw/refs/heads/main/libmimalloc-secure.so && \
 chmod +x /usr/lib64/libmimalloc-secure.so && \
@@ -31,7 +32,7 @@ dnf install firewalld -y && \
 # SCAP
 dnf install openscap openscap-scanner scap-security-guide -y && \
 oscap xccdf generate fix --profile xccdf_org.ssgproject.content_profile_anssi_bp28_minimal --fix-type bash /usr/share/xml/scap/ssg/content/ssg-rl9-ds.xml > /scap.sh && \
-(bash /scap.sh || true) && 
+(bash /scap.sh || true) && \
 rm -vf /scap.sh && \
 # Clean
 dnf clean all
