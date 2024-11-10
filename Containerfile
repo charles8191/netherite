@@ -4,8 +4,7 @@ FROM ghcr.io/charles8191/calcite/9
 ADD net-privacy.conf /usr/lib/NetworkManager/conf.d/30-net-privacy.conf
 ADD chrony.conf /etc/chrony.conf
 ADD tunables.conf /usr/lib/sysctl.d/tunables.conf
-RUN \
-set -x && \
+RUN set -x && \
 # Install mimalloc
 curl --create-dirs -Lo /usr/lib64/libmimalloc-secure.so https://github.com/charles8191/mimalloc-secure/raw/refs/heads/main/libmimalloc-secure.so && \
 chmod +x /usr/lib64/libmimalloc-secure.so && \
