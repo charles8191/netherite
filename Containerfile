@@ -3,6 +3,7 @@ FROM ghcr.io/charles8191/calcite/9
 # Adding configuration files
 ADD net-privacy.conf /usr/lib/NetworkManager/conf.d/30-net-privacy.conf
 ADD chrony.conf /etc/chrony.conf
+ADD chrony.conf /usr/etc/chrony.conf
 ADD tunables.conf /usr/lib/sysctl.d/tunables.conf
 RUN \
 set -x && \
@@ -10,6 +11,7 @@ set -x && \
 curl --create-dirs -Lo /usr/lib64/libmimalloc-secure.so https://github.com/charles8191/mimalloc-secure/raw/refs/heads/main/libmimalloc-secure.so && \
 chmod +x /usr/lib64/libmimalloc-secure.so && \
 echo "/usr/lib64/libmimalloc-secure.so" > /etc/ld.so.preload && \
+echo "/usr/lib64/libmimalloc-secure.so" > /usr/etc/ld.so.preload && \
 # Branding
 sed -i 's,rockylinux.org,github.com/charles8191/netherite,g' /usr/lib/os-release && \
 sed -i 's,Rocky Linux,Netherite,g' /usr/lib/os-release && \
@@ -26,6 +28,7 @@ curl --create-dirs -Lo /pubkey.gpg https://repo.librewolf.net/pubkey.gpg && \
 rpm --import /pubkey.gpg && \
 rm -vf /pubkey.gpg && \
 curl -fsSL https://repo.librewolf.net/librewolf.repo | tee /etc/yum.repos.d/librewolf.repo && \
+curl -fsSL https://repo.librewolf.net/librewolf.repo | tee /usr/etc/yum.repos.d/librewolf.repo && \
 dnf swap firefox librewolf -y && \
 # firewalld (breaks the kickstart if not present)
 dnf install firewalld -y && \
