@@ -28,6 +28,7 @@ curl --create-dirs -Lo /pubkey.gpg https://repo.librewolf.net/pubkey.gpg && \
 rpm --import /pubkey.gpg && \
 rm -vf /pubkey.gpg && \
 curl -fsSL https://repo.librewolf.net/librewolf.repo | tee /etc/yum.repos.d/librewolf.repo && \
+mkdir -p /usr/etc/yum.repos.d
 curl -fsSL https://repo.librewolf.net/librewolf.repo | tee /usr/etc/yum.repos.d/librewolf.repo && \
 dnf swap firefox librewolf -y && \
 # firewalld (breaks the kickstart if not present)
