@@ -2,6 +2,12 @@
 
 Netherite is a secure & private operating system based on [Calcite](https://github.com/charles8191/calcite), an Rocky Linux-based immutable OS.
 
+> [!NOTE]
+> We've switched memory allocators, if you have issues run this in the opposite ostree and reboot:
+> ```
+> echo 'echo "/usr/lib64/libmimalloc-secure.so" > /etc/ld.so.preload' | sudo bash
+> ```
+
 > [!IMPORTANT]  
 > We have changed to Rocky Linux, please reinstall.
 
