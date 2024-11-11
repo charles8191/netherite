@@ -30,13 +30,13 @@ rm -vf /pubkey.gpg && \
 curl -fsSL https://repo.librewolf.net/librewolf.repo | tee /etc/yum.repos.d/librewolf.repo && \
 mkdir -p /usr/etc/yum.repos.d && \
 curl -fsSL https://repo.librewolf.net/librewolf.repo | tee /usr/etc/yum.repos.d/librewolf.repo && \
-dnf swap firefox librewolf -y && \
+rpm-ostree override remove firefox --install librewolf && \
 # firewalld (breaks the kickstart if not present)
-dnf install firewalld -y && \
+rpm-ostree install firewalld && \
 # SCAP
-dnf install openscap openscap-scanner scap-security-guide -y && \
+rpm-ostree install openscap openscap-scanner scap-security-guide -y && \
 oscap xccdf generate fix --profile xccdf_org.ssgproject.content_profile_anssi_bp28_minimal --fix-type bash /usr/share/xml/scap/ssg/content/ssg-rl9-ds.xml > /scap.sh && \
 (bash /scap.sh || true) && \
 rm -vf /scap.sh && \
 # Clean
-dnf clean all
+rpm-ostree cleanup
