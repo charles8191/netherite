@@ -39,4 +39,4 @@ oscap xccdf generate fix --profile xccdf_org.ssgproject.content_profile_anssi_bp
 (bash /scap.sh || true) && \
 rm -vf /scap.sh && \
 # Clean
-rpm-ostree cleanup
+rpm-ostree cleanup --base
