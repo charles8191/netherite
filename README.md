@@ -20,7 +20,7 @@ Netherite is a secure & private operating system based on [Calcite](https://gith
 
 ## Installation
 
-You can use the [ISO](https://github.com/charles8191/netherite/releases/latest) (highly recommended), or use `bootc switch` if you are using Calcite or just plain Rocky bootc:
+You can use the [ISO](https://github.com/charles8191/netherite/releases/latest/download/9.iso) (highly recommended), or use `bootc switch` if you are using Calcite or just plain Rocky bootc:
 
 ```bash
 bootc switch ghcr.io/charles8191/netherite/9
