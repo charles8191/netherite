@@ -7,11 +7,11 @@ ADD chrony.conf /usr/etc/chrony.conf
 ADD tunables.conf /usr/lib/sysctl.d/tunables.conf
 RUN \
 set -x && \
-# Install mimalloc
-curl --create-dirs -Lo /usr/lib64/libmimalloc-secure.so https://github.com/charles8191/mimalloc-secure/raw/refs/heads/main/libmimalloc-secure.so && \
-chmod +x /usr/lib64/libmimalloc-secure.so && \
-echo "/usr/lib64/libmimalloc-secure.so" > /etc/ld.so.preload && \
-echo "/usr/lib64/libmimalloc-secure.so" > /usr/etc/ld.so.preload && \
+# Memory allocator
+curl --create-dirs -Lo /usr/lib64/libscudo.so https://github.com/charles8191/scudo/raw/refs/heads/main/libscudo.so && \
+chmod +x /usr/lib64/libscudo.so && \
+echo "/usr/lib64/libscudo.so" > /etc/ld.so.preload && \
+echo "/usr/lib64/libscudo.so" > /usr/etc/ld.so.preload && \
 # Branding
 sed -i 's,rockylinux.org,github.com/charles8191/netherite,g' /usr/lib/os-release && \
 sed -i 's,Rocky Linux,Netherite,g' /usr/lib/os-release && \

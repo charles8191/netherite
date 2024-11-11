@@ -10,7 +10,7 @@ Netherite is a secure & private operating system based on [Calcite](https://gith
 
 ## Features
 
-- [mimalloc](https://github.com/microsoft/mimalloc) (secure mode) using [mimalloc-secure binary](https://github.com/charles8191/mimalloc-secure)
+- [scudo](https://source.android.com/docs/security/test/scudo) using [weekly scudo binaries](https://github.com/charles8191/scudo)
 - Some remediations from ANSSI-BP-028 Minimal
 - [LibreWolf](https://librewolf.net/) instead of Firefox
 - Custom chrony config
