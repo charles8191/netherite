@@ -8,10 +8,10 @@ ADD tunables.conf /usr/lib/sysctl.d/tunables.conf
 RUN \
 set -x && \
 # Memory allocator
-curl --create-dirs -Lo /usr/lib64/libmimalloc-secure.so https://github.com/charles8191/mimalloc-secure/raw/refs/heads/main/libmimalloc-secure.so && \
-chmod +x /usr/lib64/libmimalloc-secure.so && \
-echo "/usr/lib64/libmimalloc-secure.so" > /etc/ld.so.preload && \
-echo "/usr/lib64/libmimalloc-secure.so" > /usr/etc/ld.so.preload && \
+curl --create-dirs -Lo /usr/lib64/libSlimGuard.so https://github.com/charles8191/SlimGuard/raw/refs/heads/main/libSlimGuard.so && \
+chmod +x /usr/lib64/libSlimGuard.so && \
+echo "/usr/lib64/libSlimGuard.so" > /etc/ld.so.preload && \
+echo "/usr/lib64/libSlimGuard.so" > /usr/etc/ld.so.preload && \
 # Branding
 sed -i 's,rockylinux.org,github.com/charles8191/netherite,g' /usr/lib/os-release && \
 sed -i 's,Rocky Linux,Netherite,g' /usr/lib/os-release && \
