@@ -8,10 +8,10 @@ ADD tunables.conf /usr/lib/sysctl.d/tunables.conf
 RUN \
 set -x && \
 # Memory allocator
-curl --create-dirs -Lo /usr/lib64/libscudo.so https://github.com/charles8191/scudo/raw/refs/heads/main/libscudo.so && \
-chmod +x /usr/lib64/libscudo.so && \
-echo "/usr/lib64/libscudo.so" > /etc/ld.so.preload && \
-echo "/usr/lib64/libscudo.so" > /usr/etc/ld.so.preload && \
+curl --create-dirs -Lo /usr/lib64/libmimalloc-secure.so https://github.com/charles8191/mimalloc-secure/raw/refs/heads/main/libmimalloc-secure.so && \
+chmod +x /usr/lib64/libmimalloc-secure.so && \
+echo "/usr/lib64/libmimalloc-secure.so" > /etc/ld.so.preload && \
+echo "/usr/lib64/libmimalloc-secure.so" > /usr/etc/ld.so.preload && \
 # Branding
 sed -i 's,rockylinux.org,github.com/charles8191/netherite,g' /usr/lib/os-release && \
 sed -i 's,Rocky Linux,Netherite,g' /usr/lib/os-release && \
@@ -30,11 +30,13 @@ rm -vf /pubkey.gpg && \
 curl -fsSL https://repo.librewolf.net/librewolf.repo | tee /etc/yum.repos.d/librewolf.repo && \
 mkdir -p /usr/etc/yum.repos.d && \
 curl -fsSL https://repo.librewolf.net/librewolf.repo | tee /usr/etc/yum.repos.d/librewolf.repo && \
-rpm-ostree override remove firefox --install librewolf && \
+dnf swap firefox librewolf -y && \
 # firewalld (breaks the kickstart if not present)
-rpm-ostree install firewalld && \
+dnf install firewalld -y && \
 # SCAP
-rpm-ostree install openscap openscap-scanner scap-security-guide -y && \
+dnf install openscap openscap-scanner scap-security-guide -y && \
 oscap xccdf generate fix --profile xccdf_org.ssgproject.content_profile_anssi_bp28_minimal --fix-type bash /usr/share/xml/scap/ssg/content/ssg-rl9-ds.xml > /scap.sh && \
 (bash /scap.sh || true) && \
-rm -vf /scap.sh
+rm -vf /scap.sh && \
+# Clean
+dnf clean all
