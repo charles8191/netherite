@@ -1,6 +1,6 @@
 # :pick: Netherite
 
-Netherite is a secure & private operating system based on [Calcite](https://github.com/charles8191/calcite), an Rocky Linux-based immutable OS.
+Netherite is a secure & private operating system based on [Calcite](https://github.com/charles8191/calcite), a Rocky Linux-based immutable OS. It fills the gap for a secure, private, data-persistent, secure boot capable, desktop OS.
 
 > [!IMPORTANT]  
 > We have changed to Rocky Linux, please reinstall.
@@ -10,10 +10,10 @@ Netherite is a secure & private operating system based on [Calcite](https://gith
 
 ## Features
 
-- [snmalloc](https://github.com/microsoft/snmalloc) (with checks mode) using [weekly binaries](https://github.com/charles8191/snmalloc-checks)
+- [GrapheneOS hardened_malloc](https://github.com/GrapheneOS/hardened_malloc) using [weekly binaries](https://github.com/charles8191/hardened_malloc)
 - Some remediations from ANSSI-BP-028 Minimal
 - [LibreWolf](https://librewolf.net/) instead of Firefox
-- Custom chrony config
+- Custom chrony config (`time.grapheneos.org`)
 - Custom kernel tunables
 - Modified `os-release` file
 - Enhanced NetworkManager privacy

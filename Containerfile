@@ -8,10 +8,10 @@ ADD tunables.conf /usr/lib/sysctl.d/tunables.conf
 RUN \
 set -x && \
 # Memory allocator
-curl --create-dirs -Lo /usr/lib64/libsnmallocshim-checks.so https://github.com/charles8191/snmalloc-checks/raw/refs/heads/main/libsnmallocshim-checks.so && \
-chmod +x /usr/lib64/libsnmallocshim-checks.so && \
-echo "/usr/lib64/libsnmallocshim-checks.so" > /etc/ld.so.preload && \
-echo "/usr/lib64/libsnmallocshim-checks.so" > /usr/etc/ld.so.preload && \
+curl --create-dirs -Lo /usr/lib64/libhardened_malloc.so https://github.com/charles8191/hardened_malloc/raw/refs/heads/main/libhardened_malloc.so && \
+chmod +x /usr/lib64/libhardened_malloc.so && \
+echo "/usr/lib64/libhardened_malloc.so" > /etc/ld.so.preload && \
+echo "/usr/lib64/libhardened_malloc.so" > /usr/etc/ld.so.preload && \
 # Branding
 sed -i 's,rockylinux.org,github.com/charles8191/netherite,g' /usr/lib/os-release && \
 sed -i 's,Rocky Linux,Netherite,g' /usr/lib/os-release && \
