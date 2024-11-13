@@ -1,3 +1,6 @@
+# Project halted
+Unfortunately, due to hardware compatibility issues, lack of time, anxiety, etc, I have stopped developing this project. If you want a similar OS, use Secureblue, Tails or Kicksecure.
+
 # :pick: Netherite
 
 Netherite is a secure & private operating system based on [Calcite](https://github.com/charles8191/calcite), a Rocky Linux-based immutable OS. It fills the gap for a secure, private, user-data-persistent, secure boot-capable, desktop OS.
