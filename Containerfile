@@ -13,15 +13,14 @@ chmod +x /usr/lib64/libsnmallocshim-checks.so && \
 echo "/usr/lib64/libsnmallocshim-checks.so" > /etc/ld.so.preload && \
 echo "/usr/lib64/libsnmallocshim-checks.so" > /usr/etc/ld.so.preload && \
 # Branding
-sed -i 's,rockylinux.org,github.com/charles8191/netherite,g' /usr/lib/os-release && \
-sed -i 's,Rocky Linux,Netherite,g' /usr/lib/os-release && \
-sed -i 's,Rocky,Netherite,g' /usr/lib/os-release && \
-sed -i 's,rockylinux,netherite,g' /usr/lib/os-release && \
-sed -i 's,rocky-linux,netherite,g' /usr/lib/os-release && \
-sed -i 's,rocky,netherite,g' /usr/lib/os-release && \
-sed -i 's,ID_LIKE="rhel centos fedora",ID_LIKE="rhel centos fedora rocky",g' /usr/lib/os-release && \
-sed -i 's,BUG_REPORT_URL,JUNK_BUG_REPORT_URL,g' /usr/lib/os-release && \
-sed -i 's,ROCKY_SUPPORT_PRODUCT,JUNK_ROCKY_SUPPORT_PRODUCT,g' /usr/lib/os-release && \
+sed -i 's,centos.org,github.com/charles8191/netherite,g' /usr/lib/os-release && \
+sed -i 's,CentOS Stream,Netherite,g' /usr/lib/os-release && \
+sed -i 's,CentOS,Netherite,g' /usr/lib/os-release && \
+sed -i 's,centos-stream,netherite,g' /usr/lib/os-release && \
+sed -i 's,centosstream,netherite,g' /usr/lib/os-release && \
+sed -i 's,centos,netherite,g' /usr/lib/os-release && \
+sed -i 's,ID_LIKE="rhel fedora",ID_LIKE="rhel centos fedora",g' /usr/lib/os-release && \
+sed -i 's,issues.redhat.com,github.com/charles8191/netherite/issues,g' /usr/lib/os-release && \
 sed -i 's,REDHAT_SUPPORT_PRODUCT,JUNK_REDHAT_SUPPORT_PRODUCT,g' /usr/lib/os-release && \
 # LibreWolf
 curl --create-dirs -Lo /pubkey.gpg https://repo.librewolf.net/pubkey.gpg && \
