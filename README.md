@@ -13,7 +13,7 @@ Netherite is a secure & private operating system based on [Calcite](https://gith
 - [snmalloc](https://github.com/microsoft/snmalloc) (with checks mode) using [weekly binaries](https://github.com/charles8191/snmalloc-checks)
 - Some remediations from ANSSI-BP-028 Minimal
 - [LibreWolf](https://librewolf.net/) instead of Firefox
-- Custom chrony config (`time.mit.edu`)
+- Custom chrony config (`time.cifelli.xyz`)
 - Custom kernel tunables
 - Modified `os-release` file
 - Enhanced NetworkManager privacy
