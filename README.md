@@ -1,3 +1,7 @@
+# Halted
+
+For multiple reasons, I am halting this project. Make an image based on Calcite and add your modifications to it, or switch to Kicksecure, secureblue, Tails, Qubes, or a GrapheneOS tablet.
+
 # :pick: Netherite
 
 Netherite is a secure & private operating system based on [Calcite](https://github.com/charles8191/calcite), a CentOS Stream-based immutable OS. It fills the gap for a secure, private, user-data-persistent, secure boot-capable, desktop OS.
