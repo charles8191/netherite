@@ -1,7 +1,3 @@
-# Halted
-
-For multiple reasons, I am halting this project. Make an image based on Calcite and add your modifications to it, or switch to Kicksecure, secureblue, Tails, Qubes, or a GrapheneOS tablet.
-
 # :pick: Netherite
 
 Netherite is a secure & private operating system based on [Calcite](https://github.com/charles8191/calcite), a CentOS Stream-based immutable OS. It fills the gap for a secure, private, user-data-persistent, secure boot-capable, desktop OS.
@@ -14,9 +10,9 @@ Netherite is a secure & private operating system based on [Calcite](https://gith
 
 ## Features
 
-- [snmalloc](https://github.com/microsoft/snmalloc) (with checks mode) using [weekly binaries](https://github.com/charles8191/snmalloc-checks)
+- [scudo](https://source.android.com/docs/security/test/scudo) using [weekly binaries](https://github.com/charles8191/scudo)
 - Some remediations from ANSSI-BP-028 Minimal
-- [LibreWolf](https://librewolf.net/) instead of Firefox
+- [BadWolf](https://hacktivis.me/projects/badwolf) swapped instead of Firefox
 - Custom chrony config ([time.cifelli.xyz](https://time.cifelli.xyz/))
 - Custom kernel tunables
 - Modified `os-release` file

@@ -8,10 +8,10 @@ ADD tunables.conf /usr/lib/sysctl.d/tunables.conf
 RUN \
 set -x && \
 # Memory allocator
-curl --create-dirs -Lo /usr/lib64/libsnmallocshim-checks.so https://github.com/charles8191/snmalloc-checks/raw/refs/heads/main/libsnmallocshim-checks.so && \
-chmod +x /usr/lib64/libsnmallocshim-checks.so && \
-echo "/usr/lib64/libsnmallocshim-checks.so" > /etc/ld.so.preload && \
-echo "/usr/lib64/libsnmallocshim-checks.so" > /usr/etc/ld.so.preload && \
+curl --create-dirs -Lo /usr/lib64/libscudo.so https://github.com/charles8191/scudo/raw/refs/heads/main/libscudo.so && \
+chmod +x /usr/lib64/libscudo.so && \
+echo "/usr/lib64/libscudo.so" > /etc/ld.so.preload && \
+echo "/usr/lib64/libscudo.so" > /usr/etc/ld.so.preload && \
 # Branding
 sed -i 's,centos.org,github.com/charles8191/netherite,g' /usr/lib/os-release && \
 sed -i 's,CentOS Stream,Netherite,g' /usr/lib/os-release && \
@@ -22,14 +22,8 @@ sed -i 's,centos,netherite,g' /usr/lib/os-release && \
 sed -i 's,ID_LIKE="rhel fedora",ID_LIKE="rhel centos fedora",g' /usr/lib/os-release && \
 sed -i 's,issues.redhat.com,github.com/charles8191/netherite/issues,g' /usr/lib/os-release && \
 sed -i 's,REDHAT_SUPPORT_PRODUCT,JUNK_REDHAT_SUPPORT_PRODUCT,g' /usr/lib/os-release && \
-# LibreWolf
-curl --create-dirs -Lo /pubkey.gpg https://repo.librewolf.net/pubkey.gpg && \
-rpm --import /pubkey.gpg && \
-rm -vf /pubkey.gpg && \
-curl -fsSL https://repo.librewolf.net/librewolf.repo | tee /etc/yum.repos.d/librewolf.repo && \
-mkdir -p /usr/etc/yum.repos.d && \
-curl -fsSL https://repo.librewolf.net/librewolf.repo | tee /usr/etc/yum.repos.d/librewolf.repo && \
-dnf swap firefox librewolf -y && \
+# BadWolf
+dnf swap -y --nogpgcheck firefox https://dl.fedoraproject.org/pub/archive/fedora/linux/releases/34/Everything/x86_64/os/Packages/b/badwolf-1.0.3-2.fc34.x86_64.rpm && \
 # firewalld (breaks the kickstart if not present)
 dnf install firewalld -y && \
 # SCAP
