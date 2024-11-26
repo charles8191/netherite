@@ -7,11 +7,11 @@ ADD chrony.conf /usr/etc/chrony.conf
 ADD tunables.conf /usr/lib/sysctl.d/tunables.conf
 RUN \
 set -x && \
-# Scudo
-curl --create-dirs -Lo /usr/lib64/libscudo.so https://github.com/charles8191/scudo/raw/refs/heads/main/libscudo.so && \
-chmod +x /usr/lib64/libscudo.so && \
-echo "/usr/lib64/libscudo.so" > /etc/ld.so.preload && \
-echo "/usr/lib64/libscudo.so" > /usr/etc/ld.so.preload && \
+# hardened_malloc
+curl --create-dirs -Lo /usr/lib64/libhardened_malloc.so https://github.com/charles8191/hardened_malloc/raw/refs/heads/main/libhardened_malloc-debian.so && \
+chmod +x /usr/lib64/libhardened_malloc.so && \
+echo "/usr/lib64/libhardened_malloc.so" > /etc/ld.so.preload && \
+echo "/usr/lib64/libhardened_malloc.so" > /usr/etc/ld.so.preload && \
 # Branding
 sed -i 's,centos.org,github.com/charles8191/netherite,g' /usr/lib/os-release && \
 sed -i 's,CentOS Stream,Netherite,g' /usr/lib/os-release && \
