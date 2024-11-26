@@ -11,10 +11,6 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-      - name: Get current date
-        id: date
-        run: |
-          echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
       - name: Prepare
         run: mkdir output
       - name: Build 9
@@ -24,7 +20,7 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ steps.date.outputs.date }}
-          name: Build on ${{ steps.date.outputs.date }}
+          tag_name: continuous
+          name: Continuous
           files: |
             output/*.iso
