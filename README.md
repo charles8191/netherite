@@ -10,10 +10,10 @@ Netherite is a secure & private operating system based on [Calcite](https://gith
 
 ## Features
 
-- [scudo](https://source.android.com/docs/security/test/scudo) using [weekly binaries](https://github.com/charles8191/scudo)
+- [hardened_malloc](https://github.com/GrapheneOS/hardened_malloc) using [weekly binaries](https://github.com/charles8191/hardened_malloc)
 - Some remediations from ANSSI-BP-028 Minimal
-- [BadWolf](https://hacktivis.me/projects/badwolf) swapped instead of Firefox
-- Custom chrony config ([time.cifelli.xyz](https://time.cifelli.xyz/))
+- [Cromite](https://www.cromite.org/) swapped instead of Firefox
+- Custom chrony config (time.grapheneos.org)
 - Custom kernel tunables
 - Modified `os-release` file
 - Enhanced NetworkManager privacy
