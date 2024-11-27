@@ -5,6 +5,8 @@ ADD net-privacy.conf /usr/lib/NetworkManager/conf.d/30-net-privacy.conf
 ADD chrony.conf /etc/chrony.conf
 ADD chrony.conf /usr/etc/chrony.conf
 ADD tunables.conf /usr/lib/sysctl.d/tunables.conf
+ADD browser.json /etc/chromium/policies/managed/browser.json
+ADD browser.json /usr/etc/chromium/policies/managed/browser.json
 RUN \
 set -x && \
 # hardened_malloc
@@ -22,10 +24,10 @@ sed -i 's,centos,netherite,g' /usr/lib/os-release && \
 sed -i 's,ID_LIKE="rhel fedora",ID_LIKE="rhel centos fedora",g' /usr/lib/os-release && \
 sed -i 's,issues.redhat.com,github.com/charles8191/netherite/issues,g' /usr/lib/os-release && \
 sed -i 's,REDHAT_SUPPORT_PRODUCT,JUNK_REDHAT_SUPPORT_PRODUCT,g' /usr/lib/os-release && \
-# Cromite
+# Chromium
 dnf install epel-release -y && \
 dnf config-manager --set-enabled crb && \
-dnf swap -y --nogpgcheck firefox https://github.com/charles8191/cromite/releases/download/continuous/output.rpm && \
+dnf swap -y firefox chromium && \
 # firewalld (breaks the kickstart if not present)
 dnf install firewalld -y && \
 # SCAP
