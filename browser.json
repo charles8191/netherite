@@ -12,7 +12,7 @@
     "SafeBrowsingProtectionLevel": 0,
     "NewTabPageLocation": "about:blank",
     "DnsOverHttpsMode": "secure",
-    "DnsOverHttpsTemplates": "https://dns.quad9.net/dns-query",
+    "DnsOverHttpsTemplates": "https://dns10.quad9.net/dns-query",
     "DefaultJavaScriptJitSetting": 2,
     "HomepageIsNewTabPage": true,
     "SyncDisabled": true,
