@@ -3,7 +3,7 @@
     "DefaultSearchProviderName": "DuckDuckGo",
     "DefaultSearchProviderKeyword": "duckduckgo.com",
     "DefaultSearchProviderSearchURL": "https://duckduckgo.com/?q={searchTerms}",
-    "DefaultSearchProviderSuggestURL": "https://ac.duckduckgo.com/ac/?q={searchTerms}&type=list",
+    "DefaultSearchProviderSuggestURL": "about:blank#{searchTerms}",
     "ExtensionInstallForcelist": [
         "ddkjiahejlhfcafbddmgiahcphecmpfh;https://clients2.google.com/service/update2/crx"
     ],
@@ -20,5 +20,6 @@
     "PrivacySandboxAdMeasurementEnabled": false,
     "PrivacySandboxAdTopicsEnabled": false,
     "PrivacySandboxPromptEnabled": false,
-    "PrivacySandboxSiteEnabledAdsEnabled": false
+    "PrivacySandboxSiteEnabledAdsEnabled": false,
+    "BlockThirdPartyCookies": true
 }
