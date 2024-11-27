@@ -1,17 +1,19 @@
 {
-	"DefaultSearchProviderName": "DuckDuckGo",
-	"DefaultSearchProviderKeyword": "duckduckgo.com",
-	"DefaultSearchProviderURL": "https://duckduckgo.com/?q={searchTerms}",
-	"DefaultSearchProviderSuggestURL": "https://ac.duckduckgo.com/ac/?q={searchTerms}&type=list",
-	"DefaultSearchProviderIconURL": "https://duckduckgo.com/favicon.ico",
-	"ExtensionInstallForcelist": ["ddkjiahejlhfcafbddmgiahcphecmpfh;https://clients2.google.com/service/update2/crx"],
-	"PasswordManagerEnabled": false,
-	"PasswordLeakDetectionEnabled": false,
-	"SafeBrowsingEnabled": false,
-	"NewTabPageLocation": "about:blank",
-	"DnsOverHttpsMode": "secure",
-	"DnsOverHttpsTemplates": "https://dns.quad9.net/dns-query",
-	"DefaultJavaScriptJitSetting": 2,
-	"HomepageIsNewTabPage": true,
+    "DefaultSearchProviderName": "DuckDuckGo",
+    "DefaultSearchProviderKeyword": "duckduckgo.com",
+    "DefaultSearchProviderURL": "https://duckduckgo.com/?q={searchTerms}",
+    "DefaultSearchProviderSuggestURL": "https://ac.duckduckgo.com/ac/?q={searchTerms}&type=list",
+    "DefaultSearchProviderIconURL": "https://duckduckgo.com/favicon.ico",
+    "ExtensionInstallForcelist": [
+        "ddkjiahejlhfcafbddmgiahcphecmpfh;https://clients2.google.com/service/update2/crx"
+    ],
+    "PasswordManagerEnabled": false,
+    "PasswordLeakDetectionEnabled": false,
+    "SafeBrowsingEnabled": false,
+    "NewTabPageLocation": "about:blank",
+    "DnsOverHttpsMode": "secure",
+    "DnsOverHttpsTemplates": "https://dns.quad9.net/dns-query",
+    "DefaultJavaScriptJitSetting": 2,
+    "HomepageIsNewTabPage": true,
     "SyncDisabled": true
 }
