@@ -15,5 +15,10 @@
     "DnsOverHttpsTemplates": "https://dns.quad9.net/dns-query",
     "DefaultJavaScriptJitSetting": 2,
     "HomepageIsNewTabPage": true,
-    "SyncDisabled": true
+    "SyncDisabled": true,
+    "HttpsOnlyMode": "force_enabled",
+    "PrivacySandboxAdMeasurementEnabled": false,
+    "PrivacySandboxAdTopicsEnabled": false,
+    "PrivacySandboxPromptEnabled": false,
+    "PrivacySandboxSiteEnabledAdsEnabled": false
 }
