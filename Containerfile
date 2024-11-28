@@ -33,10 +33,11 @@ dnf install firewalld -y && \
 # SCAP
 dnf install openscap openscap-scanner scap-security-guide -y && \
 oscap xccdf generate fix --profile xccdf_org.ssgproject.content_profile_anssi_bp28_minimal --fix-type bash /usr/share/xml/scap/ssg/content/ssg-cs9-ds.xml > /scap.sh && \
-(bash /scap.sh || true) && \
+bash /scap.sh ; \
 rm -vf /scap.sh && \
 # Count Me
-sed -i -e s,countme=1,countme=0, /etc/yum.repos.d/*.repo && \
-systemctl mask --now rpm-ostree-countme.timer && \
+sed -i -e s,countme=1,countme=0, /etc/yum.repos.d/*.repo ; \
+sed -i -e s,countme=1,countme=0, /usr/etc/yum.repos.d/*.repo ; \
+systemctl mask rpm-ostree-countme.timer ; \
 # Clean
 dnf clean all
