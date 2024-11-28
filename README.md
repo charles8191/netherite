@@ -17,6 +17,7 @@ Netherite is a secure & private operating system based on [Calcite](https://gith
 - [Custom kernel tunables](tunables.conf)
 - Modified `os-release` file
 - [Enhanced NetworkManager privacy](net-privacy.conf)
+- Count Me disabled
 
 ## Installation
 
