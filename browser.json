@@ -5,7 +5,13 @@
     "DefaultSearchProviderSearchURL": "https://duckduckgo.com/?q={searchTerms}",
     "DefaultSearchProviderSuggestURL": "about:blank#{searchTerms}",
     "ExtensionInstallForcelist": [
-        "ddkjiahejlhfcafbddmgiahcphecmpfh;https://clients2.google.com/service/update2/crx"
+        "ddkjiahejlhfcafbddmgiahcphecmpfh;https://clients2.google.com/service/update2/crx",
+        "lanfdkkpgfjfdikkncbnojekcppdebfp;https://clients2.google.com/service/update2/crx",
+        "olnbjpaejebpnokblkepbphhembdicik;https://clients2.google.com/service/update2/crx",
+        "fhkphphbadjkepgfljndicmgdlndmoke;https://clients2.google.com/service/update2/crx",
+        "pcbjiidheaempljdefbdplebgdgpjcbe;https://clients2.google.com/service/update2/crx",
+        "kadocklfjjaaekpjhmpbkbjkhloacing;https://clients2.google.com/service/update2/crx",
+        "niphfcamineobpiggefmngniahlpipah;https://clients2.google.com/service/update2/crx"
     ],
     "PasswordManagerEnabled": false,
     "PasswordLeakDetectionEnabled": false,
