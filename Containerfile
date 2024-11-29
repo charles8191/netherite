@@ -32,7 +32,7 @@ dnf swap -y firefox chromium && \
 dnf install firewalld -y && \
 # SCAP
 dnf install openscap openscap-scanner scap-security-guide -y && \
-oscap xccdf generate fix --profile xccdf_org.ssgproject.content_profile_anssi_bp28_minimal --fix-type bash /usr/share/xml/scap/ssg/content/ssg-cs9-ds.xml > /scap.sh && \
+oscap xccdf generate fix --profile xccdf_org.ssgproject.content_profile_anssi_bp28_minimal --fix-type bash /usr/share/xml/scap/ssg/content/ssg-al9-ds.xml > /scap.sh && \
 bash /scap.sh ; \
 rm -vf /scap.sh && \
 # Count Me
