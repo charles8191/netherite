@@ -18,12 +18,12 @@ echo "/usr/lib64/libhardened_malloc.so" > /usr/etc/ld.so.preload && \
 sed -i 's,wiki.almalinux.org,github.com/charles8191/netherite,g' /usr/lib/os-release && \
 sed -i 's,ID="almalinux",ID="netherite",g' /usr/lib/os-release && \
 sed -i 's,ALMALINUX_MANTISBT_PROJECT,JUNK_ALMALINUX_MANTISBT_PROJECT,g' /usr/lib/os-release && \
-sed -i 's,AlmaLinux,Netherite,g' /usr/lib/os-release && \
-sed -i 's,almalinux,netherite,g' /usr/lib/os-release && \
 sed -i 's,ID_LIKE="rhel centos fedora",ID_LIKE="rhel centos fedora almalinux",g' /usr/lib/os-release && \
 sed -i 's,bugs.almalinux.org,github.com/charles8191/netherite/issues,g' /usr/lib/os-release && \
 sed -i 's,wiki.almalinux.org/,https://github.com/charles8191/netherite/#faq,g' /usr/lib/os-release && \
 sed -i 's,almalinux.org,github.com/charles8191/netherite,g' /usr/lib/os-release && \
+sed -i 's,AlmaLinux,Netherite,g' /usr/lib/os-release && \
+sed -i 's,almalinux,netherite,g' /usr/lib/os-release && \
 # Chromium
 dnf install epel-release -y && \
 dnf config-manager --set-enabled crb && \
