@@ -1,9 +1,9 @@
 # :pick: Netherite
 
-Netherite is a secure & private operating system based on [Calcite](https://github.com/charles8191/calcite), a CentOS Stream-based immutable OS. It fills the gap for a secure, private, user-data-persistent, secure boot-capable, desktop OS.
+Netherite is a secure & private operating system based on [Calcite](https://github.com/charles8191/calcite), an AlmaLinux-based immutable OS. It fills the gap for a secure, private, user-data-persistent, secure boot-capable, desktop OS.
 
 > [!IMPORTANT]
-> We have changed to CentOS Stream, please reinstall.
+> We have changed to AlmaLinux, please reinstall.
 
 > [!WARNING]
 > Setting up an internet connection is mandatory, otherwise installation will fail. If you can't set up an internet connection, do not install this software.
@@ -21,17 +21,13 @@ Netherite is a secure & private operating system based on [Calcite](https://gith
 
 ## Installation
 
-You can use the [ISO](https://github.com/charles8191/netherite/releases/latest/download/9.iso) (highly recommended), or use `bootc switch` if you are using Calcite or just plain CentOS Stream bootc:
+You can use the [ISO](https://github.com/charles8191/netherite/releases/latest/download/9.iso) (highly recommended), or use `bootc switch` if you are using Calcite or just plain AlmaLinux bootc:
 
 ```bash
 bootc switch ghcr.io/charles8191/netherite/9
 ```
 
 ## FAQ
-
-### Why is Secure Boot not working?
-
-Some devices have issues with CentOS Stream's shim, if you are unlucky and have such a device, disable Secure Boot.
 
 ### Why not use secureblue?
 
