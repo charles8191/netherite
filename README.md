@@ -19,7 +19,6 @@ Netherite is a secure & private operating system based on [Calcite](https://gith
 - [Enhanced NetworkManager privacy](net-privacy.conf)
 - Count Me disabled
 - usbguard installed (but not enabled)
-- umask configured
 
 ## Installation
 
