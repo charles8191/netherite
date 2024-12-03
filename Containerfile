@@ -9,9 +9,12 @@ ADD browser.json /etc/chromium/policies/managed/browser.json
 ADD browser.json /usr/etc/chromium/policies/managed/browser.json
 RUN \
 set -x && \
+# umask
+sed -i 's/UMASK		022/UMASK		077/g' /etc/login.defs && \
+sed -i 's/HOME_MODE/#HOME_MODE/g' /etc/login.defs && \
 # hardened_malloc
 curl --create-dirs -Lo /usr/lib64/libhardened_malloc.so https://github.com/charles8191/hardened_malloc/raw/refs/heads/main/libhardened_malloc-debian.so && \
-chmod +x /usr/lib64/libhardened_malloc.so && \
+chmod 755 /usr/lib64/libhardened_malloc.so && \
 echo "/usr/lib64/libhardened_malloc.so" > /etc/ld.so.preload && \
 echo "/usr/lib64/libhardened_malloc.so" > /usr/etc/ld.so.preload && \
 # Branding
@@ -30,6 +33,9 @@ dnf config-manager --set-enabled crb && \
 dnf swap -y firefox chromium && \
 # firewalld (breaks the kickstart if not present)
 dnf install firewalld -y && \
+# usbguard
+dnf install usbguard -y && \
+systemctl disable usbguard ; \
 # SCAP
 dnf install openscap openscap-scanner scap-security-guide -y && \
 oscap xccdf generate fix --profile xccdf_org.ssgproject.content_profile_anssi_bp28_minimal --fix-type bash /usr/share/xml/scap/ssg/content/ssg-almalinux9-ds.xml > /scap.sh && \
