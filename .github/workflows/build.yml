@@ -16,4 +16,4 @@ jobs:
       - name: Build container
         run: podman build -t ghcr.io/charles8191/netherite/9 .
       - name: Push container
-        run: podman push ghcr.io/charles8191/netherite/9
+        run: podman push ghcr.io/charles8191/netherite/9 --compression-format=zstd:chunked
